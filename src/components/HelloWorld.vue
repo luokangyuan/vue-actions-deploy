@@ -1,8 +1,8 @@
 <template>
     <div class="hello">
         <span>用英文逗号分隔的输入数据</span>
-        <input type="text" v-model="params" />
-        <button @click="getSum" value="查询结果"></button>
+        <input type="text" v-model="params"/>
+        <button @click="getSum()" value="查询结果">查询结果</button>
         <div><span style="color: darkorange">计算结果：</span><span>{{maxSum}}</span></div>
     </div>
 </template>
@@ -10,15 +10,19 @@
 <script>
     export default {
         name: 'HelloWorld',
-        data () {
+        data() {
             return {
                 params: '',
                 maxSum: ''
             }
         },
-        method: {
-            getSum () {
-                let params = this.params.split(",");
+        methods: {
+            getSum() {
+                let paramsStr = this.params.split(",");
+                let params = [];
+                paramsStr.forEach(d => {
+                    params.push(parseInt(d))
+                });
                 this.maxSum = this.getMaxSun(params);
             },
             getMaxSun(data) {
